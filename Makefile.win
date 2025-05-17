@@ -1,0 +1,33 @@
+# Project: taskmgrpro
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = taskmgrpro_private.res
+OBJ      = taskpro.o $(RES)
+LINKOBJ  = taskpro.o $(RES)
+LIBS     = -L"D:/HeTianYu/安装包/devc++/5.11/Dev-Cpp/MinGW64/lib" -L"D:/HeTianYu/安装包/devc++/5.11/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -L"E:/ffmpeg-7.1.1" -leasyx -lwsock32 -lgdi32 -lpsapi -lversion -m32
+INCS     = -I"D:/HeTianYu/安装包/devc++/5.11/Dev-Cpp/MinGW64/include" -I"D:/HeTianYu/安装包/devc++/5.11/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/HeTianYu/安装包/devc++/5.11/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"E:/ffmpeg-7.1.1"
+CXXINCS  = -I"D:/HeTianYu/安装包/devc++/5.11/Dev-Cpp/MinGW64/include" -I"D:/HeTianYu/安装包/devc++/5.11/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/HeTianYu/安装包/devc++/5.11/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/HeTianYu/安装包/devc++/5.11/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"D:/HeTianYu/安装包/devc++/curl-8.8.0" -I"D:/HeTianYu/安装包/devc++/curl-8.8.0/include/curl" -I"E:/ffmpeg-7.1.1"
+BIN      = taskmgrpro.exe
+CXXFLAGS = $(CXXINCS) -m32 -w -Werror -std=c++14 -s -Os -flto -fno-rtti -static -liphlpapi
+CFLAGS   = $(INCS) -m32 -w -Werror -std=c++14 -s -Os -flto -fno-rtti -static -liphlpapi
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+taskpro.o: taskpro.cpp
+	$(CPP) -c taskpro.cpp -o taskpro.o $(CXXFLAGS)
+
+taskmgrpro_private.res: taskmgrpro_private.rc 
+	$(WINDRES) -i taskmgrpro_private.rc -F pe-i386 --input-format=rc -o taskmgrpro_private.res -O coff 
+
